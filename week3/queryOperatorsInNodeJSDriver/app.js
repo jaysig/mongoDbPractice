@@ -1,5 +1,5 @@
 var MongoClient = require('mongodb').MongoClient,
-    commandLineArgs = require('command-line-args'), 
+    commandLineArgs = require('command-line-args'),
     assert = require('assert');
 
 
@@ -9,7 +9,7 @@ MongoClient.connect('mongodb://localhost:27017/crunchbase', function(err, db) {
 
     assert.equal(err, null);
     console.log("Successfully connected to MongoDB.");
-    
+
     var query = queryDocument(options);
     var projection = {"_id": 1, "name": 1, "founded_year": 1,
                       "number_of_employees": 1, "crunchbase_url": 1};
@@ -36,31 +36,31 @@ MongoClient.connect('mongodb://localhost:27017/crunchbase', function(err, db) {
 function queryDocument(options) {
 
     console.log(options);
-    
+    //NOTE: this controls how to query the database
     var query = {
         "founded_year": {
             "$gte": options.firstYear,
             "$lte": options.lastYear
         }
     };
-
+    //NOTE: checks if the optional argument is passed into the cli 
     if ("employees" in options) {
         query.number_of_employees = { "$gte": options.employees };
     }
-        
+
     return query;
-    
+
 }
 
 
 function commandLineOptions() {
-
+    //NOTE: This creates the command line popup
     var cli = commandLineArgs([
         { name: "firstYear", alias: "f", type: Number },
         { name: "lastYear", alias: "l", type: Number },
         { name: "employees", alias: "e", type: Number }
     ]);
-    
+
     var options = cli.parse()
     if ( !(("firstYear" in options) && ("lastYear" in options))) {
         console.log(cli.getUsage({
@@ -71,7 +71,5 @@ function commandLineOptions() {
     }
 
     return options;
-    
+
 }
-
-
