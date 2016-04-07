@@ -1,5 +1,5 @@
 var MongoClient = require('mongodb').MongoClient,
-    commandLineArgs = require('command-line-args'), 
+    commandLineArgs = require('command-line-args'),
     assert = require('assert');
 
 
@@ -10,7 +10,7 @@ MongoClient.connect('mongodb://localhost:27017/crunchbase', function(err, db) {
 
     assert.equal(err, null);
     console.log("Successfully connected to MongoDB.");
-    
+
     var query = queryDocument(options);
     var projection = {"_id": 0, "name": 1, "founded_year": 1,
                       "number_of_employees": 1};
@@ -19,15 +19,17 @@ MongoClient.connect('mongodb://localhost:27017/crunchbase', function(err, db) {
     cursor.project(projection);
     cursor.limit(options.limit);
     cursor.skip(options.skip);
+    //skip and limit modify the call
+    //mongo will sort, skip, then limit
     cursor.sort([["founded_year", 1], ["number_of_employees", -1]]);
-        
+
     var numMatches = 0;
 
     cursor.forEach(
         function(doc) {
             numMatches = numMatches + 1;
             console.log(doc.name + "\n\tfounded " + doc.founded_year +
-                        "\n\t" + doc.number_of_employees + " employees"); 
+                        "\n\t" + doc.number_of_employees + " employees");
         },
         function(err) {
             assert.equal(err, null);
@@ -43,7 +45,7 @@ MongoClient.connect('mongodb://localhost:27017/crunchbase', function(err, db) {
 function queryDocument(options) {
 
     console.log(options);
-    
+
     var query = {
         "founded_year": {
             "$gte": options.firstYear,
@@ -54,9 +56,9 @@ function queryDocument(options) {
     if ("employees" in options) {
         query.number_of_employees = { "$gte": options.employees };
     }
-    
+
     return query;
-    
+
 }
 
 
@@ -69,7 +71,7 @@ function commandLineOptions() {
         { name: "skip", type: Number, defaultValue: 0 },
         { name: "limit", type: Number, defaultValue: 20000 }
     ]);
-    
+
     var options = cli.parse()
     if ( !(("firstYear" in options) && ("lastYear" in options))) {
         console.log(cli.getUsage({
@@ -80,7 +82,5 @@ function commandLineOptions() {
     }
 
     return options;
-    
+
 }
-
-
