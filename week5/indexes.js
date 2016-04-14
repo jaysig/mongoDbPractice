@@ -39,3 +39,8 @@ use *dbname*
 db.students.explain().find({'scores': {$elemMatch: {type:'exam', score:{'$gt':99.8}}}})
  - Match at least one
 Quiz answer: db.people.createIndex({"work_history.company":-1});
+
+//Creation Option, unique
+db.stuff.createIndex({thing:1}, {unique:true});
+db.stuff.remove({thing: 'apple'},{justOne: true});
+Quiz Answer: db.students.createIndex({student_id:1,class_id:1},{unique:true})
