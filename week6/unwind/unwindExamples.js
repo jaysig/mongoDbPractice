@@ -1,3 +1,6 @@
+Unwind
+-Breaks out values from an array
+- Funding round would become multiple funding round objects with the name and other details along with the funding details
 db.companies.aggregate([
     { $match: {"funding_rounds.investments.financial_org.permalink": "greylock" } },
     { $project: {
@@ -109,7 +112,7 @@ db.companies.aggregate([
 
 
 
-// Second unwind stage not strictly necessary 
+// Second unwind stage not strictly necessary
 db.companies.aggregate([
     { $match: {"funding_rounds.investments.financial_org.permalink": "greylock" } },
     { $unwind: "$funding_rounds" },
