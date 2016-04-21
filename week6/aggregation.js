@@ -12,3 +12,8 @@ Expressions
 - String
 - array expressions
 - date expressions
+
+Accumulators
+- $push
+- $addToSet
+- Project stage must operate on arrays, otherwise provide functions on multiple documents

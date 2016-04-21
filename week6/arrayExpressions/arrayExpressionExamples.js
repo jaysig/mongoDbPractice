@@ -9,9 +9,9 @@ db.companies.aggregate([
             as: "round",
             cond: { $gte: ["$$round.raised_amount", 100000000] } } }
     } },
-    { $match: {"rounds.investments.financial_org.permalink": "greylock" } },    
+    { $match: {"rounds.investments.financial_org.permalink": "greylock" } },
 ]).pretty()
-
+//Changes how the data is returned
 
 
 
@@ -26,7 +26,7 @@ db.companies.aggregate([
         last_round: { $arrayElemAt: [ "$funding_rounds", -1 ] }
     } }
 ]).pretty()
-
+//provides last round and first round
 
 db.companies.aggregate([
     { $match: { "founded_year": 2010 } },
@@ -50,7 +50,7 @@ db.companies.aggregate([
         early_rounds: { $slice: [ "$funding_rounds", 1, 3 ] }
     } }
 ]).pretty()
-
+//begin at index 1 and take the next three elemetns
 
 
 db.companies.aggregate([
@@ -62,8 +62,3 @@ db.companies.aggregate([
         total_rounds: { $size: "$funding_rounds" }
     } }
 ]).pretty()
-
-
-
-    
-

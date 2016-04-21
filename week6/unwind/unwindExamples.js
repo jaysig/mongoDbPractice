@@ -42,6 +42,7 @@ db.companies.aggregate([
 
 
 // Add second unwind stage.
+// This ensures only rounds that greylock particpated into 
 db.companies.aggregate([
     { $match: {"funding_rounds.investments.financial_org.permalink": "greylock" } },
     { $unwind: "$funding_rounds" },
