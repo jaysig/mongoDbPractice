@@ -6,7 +6,7 @@ db.companies.aggregate([
     } },
     { $sort: { "_id.founded_year": 1 } }
 ]).pretty()
-
+//$push builds up an array in the group stage
 
 db.companies.aggregate([
     { $match: { founded_year: { $gte: 2010 } } },
@@ -48,4 +48,3 @@ db.companies.aggregate( [
     } },
     { $sort: { count: -1 } }
 ] )
-
