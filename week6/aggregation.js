@@ -75,8 +75,35 @@ db.grades.aggregate( [
 db.grades.aggregate( [
     { $match: { "scores.type": { $eq: "quiz" } } },
     { $project : { class_id : "$class_id", student_id : "$student_id", _id: 0, scores: "$scores" } },
-    { $sort : { class_id : 1 } }
+    { $unwind: "$scores" },
+    { $group: {
+        _id: {class: "$class_id", student: "$student_id" , type: "$scores.type"},
+        averageScore: { $avg: "$scores.score" },
+    } },
+    { $match: { "_id.type": { $ne: "quiz" } } },
+    { $group: {
+        _id: {class: "$_id.class"},
+        averageScore: { $avg: "$averageScore" },
+    } },
+    { $sort : { averageScore : -1 } }
 ] )
+
+//close but needs quizes excluded
+db.grades.aggregate( [
+    { $match: { "scores.type": { $eq: "quiz" } } },
+    { $project : { class_id : "$class_id", student_id : "$student_id", _id: 0, scores: "$scores" } },
+    { $unwind: "$scores" },
+    { $group: {
+        _id: {class: "$class_id", student: "$student_id" , type: "$scores.type"},
+        averageScore: { $avg: "$scores.score" },
+    } },
+    // { $group: {
+    //     _id: {class: "$_id.class"},
+    //     averageScore: { $avg: "$averageScore" },
+    // } },
+    { $sort : { averageScore : -1 } }
+] )
+
 
 db.grades.aggregate( [
     { $project : { class_id : "$class_id", student_id : "$student_id",
@@ -101,3 +128,21 @@ db.grades.aggregate( [
 //Match what you are looking for
 //Project - search based these parameters
 //Unwind seperate an array into seperate things
+
+6.3
+db.companies.aggregate( [
+    { $match : { founded_year : 2004, "funding_rounds.4": { $exists: true  } }  },
+    { $project: {
+        _id: 0,
+        name: 1,
+        founded_year: 1,
+        rounds: "$funding_rounds"
+    } },
+    { $unwind: "$rounds" },
+    { $group: {
+      _id: {name: "$name"},
+      averageRaise: { $avg: "$rounds.raised_amount" },
+    } },
+    { $sort : { averageRaise : 1 } }
+
+] )
