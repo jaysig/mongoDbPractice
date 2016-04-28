@@ -41,4 +41,4 @@ overwritten when the maximum size is reached
 
 FALLOVER AND ROLLBACK
 - Mongo node will rollback data and requires to be manually added
-- set w write concern to ensure majority of data is written 
+- set w write concern to ensure majority of data is written
