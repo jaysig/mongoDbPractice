@@ -71,4 +71,9 @@ IMPLICATIONS OF SHARING ON DEVELOPMENT
 - index starts with the shard key
 - shared key specified , multi is true
 - no shard key - scatter gather
-- no unique key - unless part of shard key 
+- no unique key - unless part of shard key
+
+SHARING AND REPLICATIONS
+- shards are replica sets
+- still have write concern
+- Drivers ensure you can fall over to different mongos 
