@@ -84,3 +84,13 @@ CHOOSING A SHARD Key
 - choose something that consistent across everything
 - Post time will cause hotspotting
 - Username will distribute posts well
+
+7.1
+Replication in Mongo DB
+- minimum number of voting nodes is 3  TruE
+- MongoDB Replication is synchronus  False
+- By default, Mongo DB connection clas is w=1 and j =1 FALSE
+- Oplog uses capped collection TRUE
+
+7.2
+Five m
