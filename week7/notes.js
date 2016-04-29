@@ -76,4 +76,11 @@ IMPLICATIONS OF SHARING ON DEVELOPMENT
 SHARING AND REPLICATIONS
 - shards are replica sets
 - still have write concern
-- Drivers ensure you can fall over to different mongos 
+- Drivers ensure you can fall over to different mongos
+
+CHOOSING A SHARD Key
+- sufficient cardinality
+- Hot spotting
+- choose something that consistent across everything
+- Post time will cause hotspotting
+- Username will distribute posts well
