@@ -5,6 +5,9 @@ WRITE CONCERN
 W&J write concern
 w=1;j=1 to ensure insert or update has been written all the way to the disk
 
+w   j
+1  false - small window of vulnerablity
+1  true (1) - waits
 
 NETWORK ERRORS
 - Stuff could get written but you may not know about it
@@ -48,6 +51,9 @@ REVISITING WRITE CONCERN
 - Connection
 - Collection
 - Replica Set
+w = 3 wait fora primary node and two nodes to acknolede the write
+w = majority wait fora majority to acknowledge
+
 
 READ PREFERENCE
 - Primary - send only to the primary
@@ -93,4 +99,6 @@ Replication in Mongo DB
 - Oplog uses capped collection TRUE
 
 7.2
-Five m
+five member replica set and want to assure that writes are committed to the journal and are acknowledged
+by at least 3 nodes before you proceed forward. What would be the appropriate settings fora w and j
+w"majority":j:1
