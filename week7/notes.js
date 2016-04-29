@@ -102,3 +102,12 @@ Replication in Mongo DB
 five member replica set and want to assure that writes are committed to the journal and are acknowledged
 by at least 3 nodes before you proceed forward. What would be the appropriate settings fora w and j
 w"majority":j:1
+
+
+7.3
+- Shard key must be unique FALSE
+- There must be an index on the collection the starts with the shard key TRUE
+- MongoDB cannot enforce unique indexes on a sharded collection other than the shard key itself
+or indexes preferred by the shard key True
+- Any update that does not contain the shard key will be sent to all shards TRUE 
+- You can change a shard key on a collection if you desire FALSE
