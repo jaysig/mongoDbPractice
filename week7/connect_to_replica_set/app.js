@@ -1,5 +1,5 @@
 var MongoClient = require('mongodb').MongoClient;
-
+//list of nodes we want to connect to
 MongoClient.connect("mongodb://localhost:30001,localhost:30002,localhost:30003/course", function(err, db) {
     if (err) throw err;
 
@@ -14,3 +14,4 @@ MongoClient.connect("mongodb://localhost:30001,localhost:30002,localhost:30003/c
         });
     });
 });
+//Missing node will be discovered as long as one node is listed

@@ -42,3 +42,25 @@ overwritten when the maximum size is reached
 FALLOVER AND ROLLBACK
 - Mongo node will rollback data and requires to be manually added
 - set w write concern to ensure majority of data is written
+
+
+REVISITING WRITE CONCERN
+- Connection
+- Collection
+- Replica Set
+
+READ PREFERENCE
+- Primary - send only to the primary
+
+IMPLICATIONS OF REPLICATION
+- Seed lists
+- Write concern w,j
+- Read Preferences
+- Errors can happen
+
+INTRO TO SHARDING
+- Sharing data to multiple databases
+- Shards split the data and are replica sets
+- Mongos:handles routing
+- Range based, use shard key, If it doesnt have the shard key it will have to scan all shards
+- Only one node of a replica set is required to handle a search across all of the shards 
