@@ -63,4 +63,12 @@ INTRO TO SHARDING
 - Shards split the data and are replica sets
 - Mongos:handles routing
 - Range based, use shard key, If it doesnt have the shard key it will have to scan all shards
-- Only one node of a replica set is required to handle a search across all of the shards 
+- Only one node of a replica set is required to handle a search across all of the shards
+
+IMPLICATIONS OF SHARING ON DEVELOPMENT
+- Every doc includes the shard key
+- Shard Key is immutable
+- index starts with the shard key
+- shared key specified , multi is true
+- no shard key - scatter gather
+- no unique key - unless part of shard key 
