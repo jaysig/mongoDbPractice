@@ -56,7 +56,7 @@ MongoClient.connect('mongodb://localhost:27017/mongomart', function(err, db) {
 
     assert.equal(null, err);
     console.log("Successfully connected to MongoDB.");
-    
+
     var items = new ItemDAO(db);
     var cart = new CartDAO(db);
 
@@ -127,8 +127,8 @@ MongoClient.connect('mongodb://localhost:27017/mongomart', function(err, db) {
         var itemId = parseInt(req.params.itemId);
 
         items.getItem(itemId, function(item) {
-            console.log(item);
-
+            console.log(item, 'this is your item');
+            console.log(itemId, 'hello mr ITem');
             if (item == null) {
                 res.status(404).send("Item not found.");
                 return;

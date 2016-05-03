@@ -272,7 +272,7 @@ function ItemDAO(database) {
         this.db.collection('item').find({ $text: { $search: query,} } ).count(function(err,numItems){
           callback(numItems);
         })
-      //7 
+      //7
     }
 
 
@@ -288,15 +288,17 @@ function ItemDAO(database) {
          * _id and pass the matching item to the callback function.
          *
          */
-
-        var item = this.createDummyItem();
+         this.db.collection('item').find({_id: itemId}).toArray(function(err, anItem) {
+             console.log(anItem[0],'rtI')
+             callback(anItem[0]);
+         });;
+        // var item = this.createDummyItem();
 
         // TODO-lab3 Replace all code above (in this method).
 
         // TODO Include the following line in the appropriate
         // place within your code to pass the matching item
         // to the callback.
-        callback(item);
     }
 
 
